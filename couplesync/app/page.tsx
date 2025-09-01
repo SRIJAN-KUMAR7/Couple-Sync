@@ -1,103 +1,244 @@
-import Image from "next/image";
+"use client"
+import React, { useState, useEffect } from 'react';
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+const CoupleOfmeLanding: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleCreateRoom = () => {
+    alert('Create Room functionality would be implemented here!');
+  };
+
+  const handleGetStarted = () => {
+    alert('Get Started functionality would be implemented here!');
+  };
+
+  // Inline styles for the component
+  const styles: { [key: string]: React.CSSProperties } = {
+    page: {
+      fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+      background: 'linear-gradient(135deg, #ff94b9, #ff6384)', 
+      color: 'white',
+      minHeight: '100vh',
+      overflowX: 'hidden',
+      position: 'relative',
+      padding: isMobile ? '15px' : '20px',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    header: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: isMobile ? '15px 20px' : '20px 40px',
+      zIndex: 10,
+    },
+    appName: {
+      fontWeight: 'bold',
+      fontSize: isMobile ? '1.5rem' : '1.8rem',
+      textShadow: '1px 1px 3px rgba(0, 0, 0, 0.2)',
+    },
+    createRoomBtn: {
+      backgroundColor: 'rgba(255, 255, 255, 0.3)',
+      backdropFilter: 'blur(5px)',
+      border: '2px solid white',
+      borderRadius: '25px',
+      padding: isMobile ? '8px 16px' : '10px 25px',
+      fontWeight: 'bold',
+      color: 'white',
+      cursor: 'pointer',
+      boxShadow: '0 0 15px rgba(255, 99, 132, 0.5)',
+      transition: 'all 0.3s ease',
+      fontSize: isMobile ? '0.9rem' : '1rem',
+    },
+    main: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexGrow: 1,
+      textAlign: 'center',
+      zIndex: 10,
+      padding: isMobile ? '20px' : '40px',
+    },
+    ribbon: {
+      width: isMobile ? '120px' : '200px',
+      height: isMobile ? '8px' : '12px',
+      background: 'linear-gradient(90deg, #ff6384, #f49fb7)',
+      borderRadius: '30px',
+      marginBottom: isMobile ? '20px' : '30px',
+      boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+    },
+    title: {
+      fontSize: isMobile ? '2.5rem' : '4rem',
+      fontWeight: 900,
+      margin: 0,
+      lineHeight: 1.1,
+      textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
+      marginBottom: '15px',
+    },
+    tagline: {
+      fontSize: isMobile ? '1rem' : '1.3rem',
+      margin: '10px 0 40px 0',
+      fontStyle: 'italic',
+      maxWidth: '500px',
+      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.2)',
+    },
+    getStartedBtn: {
+      backgroundColor: 'white',
+      border: 'none',
+      borderRadius: '30px',
+      padding: isMobile ? '14px 40px' : '18px 60px',
+      fontSize: isMobile ? '1.1rem' : '1.2rem',
+      fontWeight: 'bold',
+      color: '#ff6384',
+      cursor: 'pointer',
+      boxShadow: '0 0 25px rgba(255, 148, 185, 0.7)',
+      transition: 'all 0.3s ease',
+    },
+    heartsBackground: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      pointerEvents: 'none',
+      zIndex: 0,
+      overflow: 'hidden',
+    },
+    heart: {
+      position: 'absolute',
+      backgroundColor: 'rgba(255, 255, 255, 0.15)',
+      display: 'inline-block',
+      height: '30px',
+      width: '30px',
+      transform: 'rotate(-45deg)',
+    },
+  };
+
+  // Generate heart elements for background
+  const renderHearts = () => {
+    const hearts = [];
+    const positions = [
+      { top: '10%', left: '10%', animationDelay: '0s' },
+      { top: '25%', left: '80%', animationDelay: '1s' },
+      { top: '60%', left: '15%', animationDelay: '2s' },
+      { top: '45%', left: '70%', animationDelay: '3s' },
+      { top: '75%', left: '60%', animationDelay: '4s' },
+      { top: '30%', left: '40%', animationDelay: '5s' },
+    ];
+
+    for (let i = 0; i < positions.length; i++) {
+      hearts.push(
+        <div
+          key={i}
+          className="heart"
+          style={{
+            ...styles.heart,
+            top: positions[i].top,
+            left: positions[i].left,
+            animationDelay: positions[i].animationDelay,
+          }}
         />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+      );
+    }
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+    return hearts;
+  };
+
+  return (
+    <div style={styles.page}>
+      <header style={styles.header}>
+        <div style={styles.appName}>CoupleSync</div>
+        <button 
+          style={styles.createRoomBtn}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+            e.currentTarget.style.transform = 'translateY(-2px)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+            e.currentTarget.style.transform = 'translateY(0)';
+          }}
+          onClick={handleCreateRoom}
+        >
+          Create Room
+        </button>
+      </header>
+      
+      <main style={styles.main}>
+        <div style={styles.ribbon}></div>
+        <h1 style={styles.title}>Chat and Listen<br />Together</h1>
+        <p style={styles.tagline}>Listen To Top Romantic Songs While Chatting</p>
+        <button 
+          style={styles.getStartedBtn}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-3px) scale(1.03)';
+            e.currentTarget.style.boxShadow = '0 0 30px rgba(255, 148, 185, 0.9)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0) scale(1)';
+            e.currentTarget.style.boxShadow = '0 0 25px rgba(255, 148, 185, 0.7)';
+          }}
+          onClick={handleGetStarted}
+        >
+          Get Started
+        </button>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      
+      <div style={styles.heartsBackground}>
+        {renderHearts()}
+      </div>
+
+      <style>
+        {`
+          @keyframes float {
+            0% {
+              transform: translateY(0) rotate(-45deg) scale(1);
+            }
+            50% {
+              transform: translateY(-20px) rotate(-45deg) scale(1.1);
+            }
+            100% {
+              transform: translateY(0) rotate(-45deg) scale(1);
+            }
+          }
+          
+          .heart {
+            animation: float 6s ease-in-out infinite;
+          }
+          
+          .heart:before,
+          .heart:after {
+            content: "";
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            height: 30px;
+            position: absolute;
+            width: 30px;
+          }
+          
+          .heart:before {
+            top: -15px;
+            left: 0;
+          }
+          
+          .heart:after {
+            left: 15px;
+            top: 0;
+          }
+        `}
+      </style>
     </div>
   );
-}
+};
+
+export default CoupleOfmeLanding;
