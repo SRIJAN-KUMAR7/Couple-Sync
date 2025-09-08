@@ -227,12 +227,12 @@ const CoupleOfmeLanding: React.FC = () => {
           }
           
           .heart:before {
-            top: -15px;
+            top: -16px;
             left: 0;
           }
           
           .heart:after {
-            left: 15px;
+            left: 16px;
             top: 0;
           }
         `}
