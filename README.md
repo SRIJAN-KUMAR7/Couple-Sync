@@ -1,1 +1,1 @@
-Couple Sync 
+Couple Sync for Couples
