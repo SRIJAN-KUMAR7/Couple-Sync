@@ -198,45 +198,7 @@ const CoupleOfmeLanding: React.FC = () => {
         {renderHearts()}
       </div>
 
-      <style>
-        {`
-          @keyframes float {
-            0% {
-              transform: translateY(0) rotate(-45deg) scale(1);
-            }
-            50% {
-              transform: translateY(-20px) rotate(-45deg) scale(1.1);
-            }
-            100% {
-              transform: translateY(0) rotate(-45deg) scale(1);
-            }
-          }
-          
-          .heart {
-            animation: float 6s ease-in-out infinite;
-          }
-          
-          .heart:before,
-          .heart:after {
-            content: "";
-            background-color: rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            height: 30px;
-            position: absolute;
-            width: 30px;
-          }
-          
-          .heart:before {
-            top: -16px;
-            left: 0;
-          }
-          
-          .heart:after {
-            left: 16px;
-            top: 0;
-          }
-        `}
-      </style>
+      
     </div>
   );
 };
